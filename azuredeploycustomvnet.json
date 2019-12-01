@@ -347,7 +347,7 @@
               }
             },
             "imageReference": {
-                "id": "[if(equals(parameters('platform'), 'Custom'), concat('/subscriptions/', subscription().Id, '/resourseGroups/L4_Network_Architechture/providers/Micrsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue), json('null'))]"
+                "id": "[concat('/subscriptions/', subscription().Id, '/resourceGroups/L4_Network_Architechture/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
             }
           },
           "networkProfile": {
@@ -370,34 +370,7 @@
               "enabled": false
             }
           }
-        },
-        "resources": [
-          {
-            "condition": "[equals(parameters('platform'), 'Windows')]",
-            "comments": "Custom Script that changes the region of the VM to UK",
-            "apiVersion": "2018-10-01",
-            "type": "extensions",
-            "name": "[concat(variables('vmNamePrefix'), copyIndex(1), 'CustomScriptExtension')]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-              "[concat('Microsoft.Compute/virtualMachines/', variables('vmNamePrefix'), copyIndex(1))]"
-            ],
-            "properties": {
-              "publisher": "Microsoft.Compute",
-              "type": "CustomScriptExtension",
-              "autoUpgradeMinorVersion": true,
-              "typeHandlerVersion": "1.4",
-              "settings": {
-                "fileUris": [
-                  "[concat(variables('_artifactsLocation'), '/regional-settings/regionalSettings.ps1')]"
-                ]
-              },
-              "protectedSettings": {
-                "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File regionalSettings.ps1"
-              }
-            }
-          }
-        ]
+        }
       },          
       {
         "apiVersion": "2017-04-26-preview",
