@@ -51,7 +51,6 @@
       },
       "existingVNetResourceGroup":{
         "type": "string",
-        "defaultValue": "[concat(resourceGroup().name, '-vnet')]",
         "metadata":{
             "description": "This should be the name of the current resource group"
         }
