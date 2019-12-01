@@ -4,7 +4,7 @@
     "parameters": {
       "location": {
         "type": "string",
-        "defaultValue": "ukwest",
+        "defaultValue": "uksouth",
         "allowedValues": [
           "ukwest",
           "uksouth"
@@ -39,18 +39,21 @@
       },
       "existingVNetName":{
         "type": "string",
+        "defaultValue": "L4_Network_Architechture-vnet",
         "metadata":{
           "description": "Input the name of the existing VNet to be used"
         }
       },
       "existingVNetSubnet":{
         "type": "string",
+        "defaultValue": "default",
         "metadata":{
           "description": "Input the name of the exisiting subnet to be used"
         }
       },
       "existingVNetResourceGroup":{
         "type": "string",
+        "defaultValue": "L4_Network_Architechture",
         "metadata":{
             "description": "This should be the name of the current resource group"
         }
