@@ -22,6 +22,7 @@
       },
       "virtualMachineCount": {
           "type": "int",
+          "maxValue": 14,
           "metadata": {
             "decription": "Number of Virtual Machines required e.g. 5"
           }
@@ -46,6 +47,13 @@
         "type": "string",
         "metadata":{
           "description": "Input the name of the exisiting subnet to be used"
+        }
+      },
+      "existingVNetResourceGroup":{
+        "type": "string",
+        "defaultValue": "[concat(resourceGroup().name, '-vnet')]",
+        "metadata":{
+            "description": "This should be the name of the current resource group"
         }
       },
       "createdBy":{
@@ -204,23 +212,6 @@
         }
       ]
     },
-    "existingVnet": {},
-    "newVnet": {
-      "addressSpace": {
-            "addressPrefixes": [
-              "[variables('addressPrefixes')]"
-            ]
-          },
-          "subnets": [
-            {
-              "name": "[variables('subnetName')]",
-              "properties": {
-                "addressPrefix": "[variables('subnetsAddressPrefix')]"
-              }
-            }
-          ]
-    },
-
       "_artifactsLocation": "https://raw.githubusercontent.com/balticapprenticeships/Azure-Extensions/master/"
     },
     "resources": [
@@ -276,6 +267,7 @@
         "properties": "[if(equals(parameters('platform'), 'Windows'), variables('allowRDP'), variables('allowSSH'))]"
       },
       {
+        "condition": "[equals(parameters('newOrExistingVnet'), 'newVnet')]",
         "apiVersion": "2019-04-01",
         "type": "Microsoft.Network/virtualNetworks",
         "name": "[variables('virtualNetworkName')]",      
@@ -285,7 +277,21 @@
           "Dept" : "[resourceGroup().tags['Dept']]",
           "Created By" : "[parameters('createdBy')]"
         },        
-        "properties": "[if(equals(parameters('newOrExistingVnet'), 'NewVnet'), variables('newVnet'), variables('existingVnet'))]"
+        "properties": {
+            "addressSpace": {
+            "addressPrefixes": [
+                "[variables('addressPrefixes')]"
+            ]
+            },
+            "subnets": [
+            {
+                "name": "[variables('subnetName')]",
+                "properties": {
+                "addressPrefix": "[variables('subnetsAddressPrefix')]"
+                }
+            }
+            ]
+        }
       },
       {
         "apiVersion": "2019-02-01",
