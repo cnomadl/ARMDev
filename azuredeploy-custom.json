@@ -319,7 +319,7 @@
               }
             },
             "imageReference": {
-                "id": "[resourceId('Microsoft.Compute/images', concat(variables('operatingSystemValues')[parameters('operatingSystem')].imageValue))]"
+                "id": "[resourceId('resourceGroups/VMImages/providers/Microsoft.Compute/images', concat(variables('operatingSystemValues')[parameters('operatingSystem')].imageValue))]"
             }
           },
           "networkProfile": {
