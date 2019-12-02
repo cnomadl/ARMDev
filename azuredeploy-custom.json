@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "2.0.1.0",
+    "contentVersion": "2.1.0.0",
     "parameters": {
       "location": {
         "type": "string",
@@ -22,31 +22,10 @@
       },
       "virtualMachineCount": {
           "type": "int",
+          "maxValue": 14,
           "metadata": {
             "decription": "Number of Virtual Machines required e.g. 5"
           }
-      },
-      "newOrExistingVnet": {
-        "type": "string",
-        "allowedValues": [
-          "NewVnet",
-          "ExistingVnet"
-        ],
-        "metadata":{
-          "description": "Creates a new or use an existing Vnet"
-        }
-      },
-      "existingVNetName":{
-        "type": "string",
-        "metadata":{
-          "description": "Input the name of the existing VNet to be used"
-        }
-      },
-      "existingVNetSubnet":{
-        "type": "string",
-        "metadata":{
-          "description": "Input the name of the exisiting subnet to be used"
-        }
       },
       "createdBy":{
         "type": "string",
@@ -57,6 +36,7 @@
       "trainerInitials": {
         "type": "string",
         "minLength": 2,
+        "maxLength": 2,
         "metadata": {
           "description": "Trainer initials used to create a unique resources."
         }
@@ -96,10 +76,10 @@
       "operatingSystem": {
         "type": "string",
         "allowedValues": [
-          "CustomWindowsDesktop",
-          "CustomWindowsServer2012R2",
-          "CustomWindowsServer2016",
-          "CustomUbuntuServer"
+          "WindowsDesktop",
+          "WindowsServer2012R2",
+          "WindowsServer2016",
+          "UbuntuServer"
         ],
         "metadata": {
           "description": "Choose your operating system."
@@ -139,6 +119,7 @@
       "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
       "vnetId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
       "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
+      "subscriptionId": "[subscription().id]",
       "operatingSystemValues": {
         "CustomWindowsDesktop": {
             "imageValue": "BAT-W10PRO-Image"
@@ -147,7 +128,7 @@
             "imageValue": "BAT-WS2K12R2-Image"
         },
         "CustomWindowsServer2016": {
-            "imageValue": "2016BrianB-image-20190731124458"
+            "imageValue": "WS2K16-Image"
         },
         "CustomUbuntuServer": {
             "imageValue": "BAT-Ubuntu-Image"
@@ -204,23 +185,6 @@
         }
       ]
     },
-    "existingVnet": {},
-    "newVnet": {
-      "addressSpace": {
-            "addressPrefixes": [
-              "[variables('addressPrefixes')]"
-            ]
-          },
-          "subnets": [
-            {
-              "name": "[variables('subnetName')]",
-              "properties": {
-                "addressPrefix": "[variables('subnetsAddressPrefix')]"
-              }
-            }
-          ]
-    },
-
       "_artifactsLocation": "https://raw.githubusercontent.com/balticapprenticeships/Azure-Extensions/master/"
     },
     "resources": [
@@ -285,7 +249,21 @@
           "Dept" : "[resourceGroup().tags['Dept']]",
           "Created By" : "[parameters('createdBy')]"
         },        
-        "properties": "[if(equals(parameters('newOrExistingVnet'), 'NewVnet'), variables('newVnet'), variables('existingVnet'))]"
+        "properties": {
+            "addressSpace": {
+            "addressPrefixes": [
+                "[variables('addressPrefixes')]"
+            ]
+            },
+            "subnets": [
+            {
+                "name": "[variables('subnetName')]",
+                "properties": {
+                "addressPrefix": "[variables('subnetsAddressPrefix')]"
+                }
+            }
+            ]
+        }
       },
       {
         "apiVersion": "2019-02-01",
@@ -341,7 +319,7 @@
               }
             },
             "imageReference": {
-                "id": "[if(equals(parameters('platform'), 'Custom'), concat('/subscriptions/', subscription().Id, '/resourseGroups/L4_Network_Architechture/providers/Micrsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue), json('null'))]"
+                "id": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/LNG-VMImages/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
             }
           },
           "networkProfile": {
@@ -364,34 +342,7 @@
               "enabled": false
             }
           }
-        },
-        "resources": [
-          {
-            "condition": "[equals(parameters('platform'), 'Windows')]",
-            "comments": "Custom Script that changes the region of the VM to UK",
-            "apiVersion": "2018-10-01",
-            "type": "extensions",
-            "name": "[concat(variables('vmNamePrefix'), copyIndex(1), 'CustomScriptExtension')]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-              "[concat('Microsoft.Compute/virtualMachines/', variables('vmNamePrefix'), copyIndex(1))]"
-            ],
-            "properties": {
-              "publisher": "Microsoft.Compute",
-              "type": "CustomScriptExtension",
-              "autoUpgradeMinorVersion": true,
-              "typeHandlerVersion": "1.4",
-              "settings": {
-                "fileUris": [
-                  "[concat(variables('_artifactsLocation'), '/regional-settings/regionalSettings.ps1')]"
-                ]
-              },
-              "protectedSettings": {
-                "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File regionalSettings.ps1"
-              }
-            }
-          }
-        ]
+        }
       },          
       {
         "apiVersion": "2017-04-26-preview",

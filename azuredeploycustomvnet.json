@@ -149,6 +149,7 @@
       "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
       "vnetId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
       "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
+      "subscriptionId": "[subscription().id]",
       "operatingSystemValues": {
         "CustomWindowsDesktop": {
             "imageValue": "BAT-W10PRO-Image"
@@ -349,7 +350,7 @@
               }
             },
             "imageReference": {
-                "id": "[concat('/subscriptions/822ba9e4-c8d6-4bba-b7bc-8e6786d172e3/resourceGroups/L4_Network_Architechture/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
+                "id": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/L4_Network_Architechture/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
             }
           },
           "networkProfile": {
