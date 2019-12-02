@@ -121,16 +121,16 @@
       "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
       "subscriptionId": "[subscription().id]",
       "operatingSystemValues": {
-        "CustomWindowsDesktop": {
+        "WindowsDesktop": {
             "imageValue": "BAT-W10PRO-Image"
         },
-        "CustomWindowsServer2012R2": {
+        "WindowsServer2012R2": {
             "imageValue": "BAT-WS2K12R2-Image"
         },
-        "CustomWindowsServer2016": {
+        "WindowsServer2016": {
             "imageValue": "WS2K16-Image"
         },
-        "CustomUbuntuServer": {
+        "UbuntuServer": {
             "imageValue": "BAT-Ubuntu-Image"
         }
     },
@@ -336,7 +336,7 @@
             "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'Password'), json('null'), variables('linuxConfiguration'))]",
             "windowsConfiguration": "[if(equals(parameters('platform'), 'Windows'), variables('windowsConfiguration'), json('null'))]"
           },
-          "licenseType": "[if(equals(parameters('operatingSystem'), 'CustomWindowsDesktop'), variables('windowsLicense'), json('null'))]",
+          "licenseType": "[if(equals(parameters('operatingSystem'), 'WindowsDesktop'), variables('windowsLicense'), json('null'))]",
           "diagnosticsProfile": {
             "bootDiagnostics": {
               "enabled": false
