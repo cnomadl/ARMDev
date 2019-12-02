@@ -128,7 +128,7 @@
             "imageValue": "BAT-WS2K12R2-Image"
         },
         "WindowsServer2016": {
-            "imageValue": "WS2K16-Image"
+            "imageValue": "WS2K16UK-image"
         },
         "UbuntuServer": {
             "imageValue": "BAT-Ubuntu-Image"
