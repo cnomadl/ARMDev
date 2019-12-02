@@ -13,6 +13,12 @@
           "description": "Location to store the resource group and all vm's."
         }
       },
+      "subscriptionId":{
+        "type": "string",
+        "metadata":{
+          "description": "Unique subscription ID"
+        }
+      },
       "virtualMachineName": {
         "type": "string",
         "maxLength": 10,
@@ -319,7 +325,7 @@
               }
             },
             "imageReference": {
-                "id": "[resourceId('resourceGroups/VMImages/providers/Microsoft.Compute/images', concat(variables('operatingSystemValues')[parameters('operatingSystem')].imageValue))]"
+                "id": "[concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/VMImages/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
             }
           },
           "networkProfile": {
