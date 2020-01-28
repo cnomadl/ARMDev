@@ -13,6 +13,12 @@
           "description": "Location to store the resource group and all vm's."
         }
       },
+      "subscriptionId":{
+        "type": "string",
+        "metadata":{
+          "description": "ID of the subscription where the VM's will be created"
+        }
+      },
       "virtualMachineName": {
         "type": "string",
         "maxLength": 10,
@@ -106,10 +112,10 @@
       "operatingSystem": {
         "type": "string",
         "allowedValues": [
-          "CustomWindowsDesktop",
-          "CustomWindowsServer2012R2",
-          "CustomWindowsServer2016",
-          "CustomUbuntuServer"
+          "Windows10Desktop",
+          "WindowsServer2012R2",
+          "WindowsServer2016",
+          "UbuntuServer"
         ],
         "metadata": {
           "description": "Choose your operating system."
@@ -149,18 +155,17 @@
       "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
       "vnetId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
       "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
-      "subscriptionId": "[subscription().id]",
       "operatingSystemValues": {
-        "CustomWindowsDesktop": {
-            "imageValue": "BAT-W10PRO-Image"
+        "Windows10Desktop": {
+            "imageValue": "Win10BaseImage"
         },
-        "CustomWindowsServer2012R2": {
+        "WindowsServer2012R2": {
             "imageValue": "BAT-WS2K12R2-Image"
         },
-        "CustomWindowsServer2016": {
-            "imageValue": "2016BrianB-image-20190731124458"
+        "WindowsServer2016": {
+            "imageValue": "Server2016Base-image-20200110150716"
         },
-        "CustomUbuntuServer": {
+        "UbuntuServer": {
             "imageValue": "BAT-Ubuntu-Image"
         }
     },
@@ -350,7 +355,7 @@
               }
             },
             "imageReference": {
-                "id": "[concat('/subscriptions/', variables('subscriptionId'), '/resourceGroups/L4_Network_Architechture/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
+                "id": "[concat('/subscriptions/', parameters('subscriptionId'), '/resourceGroups/BalticImagesRg/providers/Microsoft.Compute/images/', variables('operatingSystemValues')[parameters('operatingSystem')].imageValue)]"
             }
           },
           "networkProfile": {
