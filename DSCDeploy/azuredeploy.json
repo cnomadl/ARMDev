@@ -1,0 +1,116 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location":{
+            "type": "string",
+            "defaultValue": "ukwest",
+            "allowedValues":[
+                "ukwest",
+                "uksouth"
+            ],
+            "metadata":{
+                "description": "Location to store the resource group and all VMs"
+            }
+        },
+        "subscriptionId":{
+            "type": "string",
+            "metadata":{
+                "description": "ID of the subscription where the VM's will be created"
+            }
+        },
+        "virtualMachineName": {
+            "type": "string",
+            "maxLength": 10,
+            "metadata": {
+                "description": "Virtual Machine name e.g. 306Client"
+            }
+        },
+        "virtualMachineCount":{
+            "type": "int",
+            "maxValue": 14,
+            "metadata": {
+                "description": "Number of Virtual Machines required e.g. 5"
+            }
+        },
+        "osDiskType":{
+            "type": "string",
+            "defaultValue": "Standard_LRS",
+            "allowedValues": [
+                "Standard_LRS"
+            ],
+            "metadata":{
+                "description": "Type of storage, Standard HDD, SSD or Premium"
+            }
+        },
+        "virtualMachineSize":{
+            "type": "string",
+            "defaultValue": "Standard_D2s_v3",
+            "allowedValues": [
+                "Standard_D2_v3",
+                "Standard_D2s_v3",
+                "Standard_Ds3_v2"
+            ]
+        },
+        "platform":{
+            "type": "string",
+            "allowedValues": [
+                "Windows",
+                "Linux"
+            ],
+            "metadata": {
+                "description": "Select the OS type to deploy"
+            }
+        },
+        "operatingSystem":{
+            "type": "string",
+            "allowedValues":[
+                "Windows10Desktop",
+                "WondowsServer2016",
+                "UbuntuServer"
+            ],
+            "metadata": {
+                "description": "Choose your operating system"
+            }
+        },
+        "adminUsername":{
+            "type": "string",
+            "metadata": {
+                "description": "Admin Username of theVirtual Machine"
+            }
+        },
+        "authenticationType": {
+            "type": "string",
+            "defaultValue": "Password",
+            "allowedValues": [
+                "Password",
+                "sshPublicKey"
+            ],
+            "description": "The type of authentication used on the Virtual Machine. SSH is recommended for Linux"
+        },
+        "AdminPasswordOrSsh":{
+            "type": "securestring",
+            "metadata":{
+                "description": "Admin Password for Virtual Machine. If Linux SSH is recommended"
+            }
+        },
+        "_artifactsLocationSasToken":{
+            "type": "string",
+            "defaultValue": "",
+            "metadata":{
+                "description": "SAS token to access artifacts location, if required"
+            }
+        },
+        "compileName":{
+            "type": "string",
+            "defaultValue": "[guid(resourceGroup().id, deployment().name)]",
+            "metadata": {
+                "description": "A uniquie value to identify compilation job"
+            }
+        }
+    },
+    "variables": {},
+    "resources": [],
+    "outputs": {},
+    "functions": []
+}
