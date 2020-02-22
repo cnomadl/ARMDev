@@ -91,7 +91,7 @@
           "description": "Choose your operating system."
         }
       },
-      "virtualMachineAdminUsername": {
+      "adminUsername": {
         "type": "string",
         "metadata": {
           "description": "Admin username for the Virtual Machine."
@@ -108,10 +108,16 @@
           "descriptopn": "The type of authentication used on the virtual machine. SSH is recommended for Linux VMs"
         }
     },
-      "virtualMachineAdminPasswordOrSsh": {
+      "adminPasswordOrSsh": {
         "type": "securestring",
         "metadata": {
           "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
+        }
+      },
+      "userPassword": {
+        "type": "securestring",
+        "metadata": {
+          "description": "Password for user login. If Linux SSH is recommended."
         }
       }      
     },
@@ -150,8 +156,8 @@
         "ssh": {
             "publicKeys": [
                 {
-                    "path": "[concat('/home/', parameters('virtualMachineAdminUsername'), '/.ssh/authorized_keys')]",
-                    "keyData": "[parameters('virtualMachineAdminPasswordOrSsh')]"
+                    "path": "[concat('/home/', parameters('adminUsername'), '/.ssh/authorized_keys')]",
+                    "keyData": "[parameters('adminPasswordOrSsh')]"
                 }
             ]
         }
@@ -338,8 +344,8 @@
           },
           "osProfile": {
             "computerName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
-            "adminUsername": "[parameters('virtualMachineAdminUsername')]",
-            "adminPassword": "[if(equals(parameters('authenticationType'), 'Password'), parameters('virtualMachineAdminPasswordOrSsh'), json('null'))]",
+            "adminUsername": "[parameters('adminUsername')]",
+            "adminPassword": "[if(equals(parameters('authenticationType'), 'Password'), parameters('adminPasswordOrSsh'), json('null'))]",
             "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'Password'), json('null'), variables('linuxConfiguration'))]",
             "windowsConfiguration": "[if(equals(parameters('platform'), 'Windows'), variables('windowsConfiguration'), json('null'))]"
           },
@@ -354,7 +360,7 @@
           {
             "apiVersion": "2016-03-30",
             "type": "extensions",
-            "name": "Mocrosoft.Powershell.DSC",
+            "name": "Microsoft.Powershell.DSC",
             "location": "[parameters('location')]",
             "tags": {
               "DisplayName": "DSC",
@@ -376,7 +382,8 @@
                   "function": "Main"
                 },
                 "configurationArguments": {
-                  "nodeName": "[concat(variables('vmNamePrefix'), copyIndex(1))]"
+                  "nodeName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
+                  "passwordCred": "[parameters('userPassword')]"
                 }
               }
             }
