@@ -376,10 +376,11 @@
               "typeHandlerVersion": "2.9",
               "autoUpgradeMinorVersion": true,
               "settings": {
+                "wmfVersion": "latest",
                 "configuration": {
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
                   "script": "BaLabServerDsc.ps1",
-                  "function": "BaLabServerDsc.ps1\\BaLabServerCfg"
+                  "function": "baLabServerCfg"
                 },
                 "configurationArguments": {
                   "nodeName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
