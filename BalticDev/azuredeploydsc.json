@@ -198,7 +198,7 @@
     },
     "_artifactslocation": "https://raw.githubusercontent.com/balticapprenticeships/azure-extensions/master",
     "dscArchiveFolder": "DSC",
-    "dscArchiveFileName": "createUserDsc.zip"
+    "dscArchiveFileName": "BaLabServerDsc.zip"
     },
     "resources": [
       {
@@ -378,7 +378,7 @@
               "settings": {
                 "configuration": {
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
-                  "script": "createUserDsc.ps1",
+                  "script": "BaLabServerDsc.ps1",
                   "function": "Main"
                 },
                 "configurationArguments": {
