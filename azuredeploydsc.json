@@ -379,7 +379,7 @@
                 "configuration": {
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
                   "script": "BaLabServerDsc.ps1",
-                  "function": "Main"
+                  "function": "BaLabServerDsc.ps1\\BaLabServerCfg"
                 },
                 "configurationArguments": {
                   "nodeName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
