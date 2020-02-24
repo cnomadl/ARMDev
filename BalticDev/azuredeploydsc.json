@@ -373,7 +373,7 @@
             "properties": {
               "publisher": "Microsoft.Powershell",
               "type": "DSC",
-              "typeHandleVersion": "2.9",
+              "typeHandlerVersion": "2.9",
               "autoUpgradeMinorVersion": true,
               "settings": {
                 "configuration": {
