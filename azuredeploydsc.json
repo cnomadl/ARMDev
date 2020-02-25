@@ -364,7 +364,7 @@
         },
         "resources":[
           {
-            "apiVersion": "2016-03-30",
+            "apiVersion": "2018-10-01",
             "type": "extensions",
             "name": "Microsoft.Powershell.DSC",
             "location": "[parameters('location')]",
@@ -397,7 +397,7 @@
               },
               "protectedSettings": {
                 "configurationArguments": {
-                  "userCred": {
+                  "credential": {
                     "UserName": "[parameters('noneAdminUsername')]",
                     "Password": "[parameters('noneAdminUserPassword')]"
                   }
