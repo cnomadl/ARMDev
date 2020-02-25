@@ -114,10 +114,16 @@
           "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
         }
       },
-      "userPassword": {
+      "noneAdminUsername": {
+        "type":"string",
+        "metadata":{
+          "description": "None admin username"
+        }
+      },
+      "noneAdminUserPassword": {
         "type": "securestring",
         "metadata": {
-          "description": "Password for user login. If Linux SSH is recommended."
+          "description": "None admin user password. If Linux SSH is recommended."
         }
       }      
     },
@@ -383,8 +389,18 @@
                   "function": "baLabServerCfg"
                 },
                 "configurationArguments": {
-                  "nodeName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
-                  "passwordCred": "[parameters('userPassword')]"
+                  "nodeName": "[concat(variables('vmNamePrefix'), copyIndex(1))]"
+                },
+                "privacy": {
+                  "dataCollection": "Disable"
+                }
+              },
+              "protectedSettings": {
+                "configurationArguments": {
+                  "userCred": {
+                    "UserName": "[parameters('noneAdminUsername')]",
+                    "Password": "[parameters('noneAdminUserPassword')]"
+                  }
                 }
               }
             }
