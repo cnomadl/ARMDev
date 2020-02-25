@@ -204,7 +204,7 @@
     },
     "_artifactslocation": "https://raw.githubusercontent.com/balticapprenticeships/azure-extensions/master",
     "dscArchiveFolder": "DSC",
-    "dscArchiveFileName": "BaLabServerDsc.zip"
+    "dscArchiveFileName": "createUserDsc.zip"
     },
     "resources": [
       {
