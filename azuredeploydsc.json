@@ -133,7 +133,7 @@
       "Windows10Pro": {
         "publisherValue": "MicrosoftWindowsDesktop",
         "offerValue": "Windows-10",
-        "skuValue": "rs5-pro"
+        "skuValue": "rs5-pro-g2"
       },
       "Server2012R2": {
         "publisherValue": "MicrosoftWindowsServer",
@@ -143,7 +143,7 @@
       "Server2016": {
         "publisherValue": "MicrosoftWindowsServer",
         "offerValue": "WindowsServer",
-        "skuValue": "2016-Datacenter"
+        "skuValue": "2016-Datacenter-gensecond"
       },
       "Ubuntu": {
           "publisherValue": "Canonical",
