@@ -397,7 +397,7 @@
                       "nodeName": "[concat(variables('vmNamePrefix'), copyIndex(1))]",
                         "Credential": {
                             "UserName": "[parameters('noneAdminUsername')]",
-                            "Password": "PrivateSettingRef:UserPassword"
+                            "Password": "PrivateSettingsRef:UserPassword"
                         }
                   }
                 },
