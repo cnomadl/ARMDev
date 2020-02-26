@@ -394,7 +394,7 @@
                 "configuration": {
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
                   "script": "xCreateUserDsc.ps1",
-                  "function": "CreateUserAccount"
+                  "function": "xUser_CreateUserConfig"
                 },
                 "configurationArguments": {
                   "nodeName": "[concat(variables('vmNamePrefix'), copyIndex(1))]"
