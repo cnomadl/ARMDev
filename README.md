@@ -19,7 +19,7 @@ This template allows you to deploy multiple Windows VM using a few different opt
 
 # Multi VM deployment to Azure with DSC
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcnomadl%2Farmdev%2Fmaster%2Fazuredeploydsc.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcnomadl%2Farmdev%2Fmaster%2Fazuredeploycustomdsc.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
