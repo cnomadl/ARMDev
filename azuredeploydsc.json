@@ -395,9 +395,6 @@
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
                   "script": "createUserDsc.ps1",
                   "function": "baLabServerCfg"
-                },
-                "configurationArguments": {
-                  "nodeName": "[concat(variables('vmNamePrefix'), copyIndex(1))]"
                 }
               },
               "protectedSettings": {
