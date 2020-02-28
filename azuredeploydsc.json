@@ -204,7 +204,7 @@
   },
     "_artifactslocation": "https://raw.githubusercontent.com/balticapprenticeships/azure-extensions/master",
     "dscArchiveFolder": "DSC",
-    "dscArchiveFileName": "xCreateUserDsc.zip"
+    "dscArchiveFileName": "createUserDsc.zip"
   },
   "resources": [
     {
@@ -372,7 +372,7 @@
       },
       "resources": [
         {
-            "apiVersion": "2018-10-01",
+            "apiVersion": "2016-03-30",
             "type": "extensions",
             "name": "Microsoft.Powershell.DSC",
             "location": "[parameters('location')]",
@@ -387,20 +387,17 @@
             "properties": {
               "publisher": "Microsoft.Powershell",
               "type": "DSC",
-              "typeHandlerVersion": "2.9",
+              "typeHandlerVersion": "2.19",
               "autoUpgradeMinorVersion": true,
               "settings": {
                 "wmfVersion": "latest",
                 "configuration": {
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
-                  "script": "xCreateUserDsc.ps1",
-                  "function": "xUser_CreateUserConfig"
+                  "script": "createUserDsc.ps1",
+                  "function": "baLabServerCfg"
                 },
                 "configurationArguments": {
                   "nodeName": "[concat(variables('vmNamePrefix'), copyIndex(1))]"
-                },
-                "privacy": {
-                  "dataCollection": "Disable"
                 }
               },
               "protectedSettings": {
