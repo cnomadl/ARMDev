@@ -31,7 +31,7 @@ Configuration xBaLabServerCfg {
             PasswordChangeNotAllowed = $true
         }
 
-        xGroupSet 'SetMembers'
+        xGroupSet 'AddMembers'
         {
             GroupName = $groups
             Ensure = 'Present'
