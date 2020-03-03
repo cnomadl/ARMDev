@@ -202,9 +202,9 @@
       }
     ]
   },
-    "_artifactslocation": "https://raw.githubusercontent.com/balticapprenticeships/azure-extensions/master",
+    "_artifactslocation": "https://raw.githubusercontent.com/cnomadl/ARMDev/master",
     "dscArchiveFolder": "DSC",
-    "dscArchiveFileName": "createUserDsc.zip"
+    "dscArchiveFileName": "xCreateUserDsc.zip"
   },
   "resources": [
     {
@@ -393,8 +393,8 @@
                 "wmfVersion": "latest",
                 "configuration": {
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
-                  "script": "createUserDsc.ps1",
-                  "function": "baLabServerCfg"
+                  "script": "xCreateUserDsc.ps1",
+                  "function": "xUser_CreateUserConfig"
                 }
               },
               "protectedSettings": {

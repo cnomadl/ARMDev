@@ -11,7 +11,7 @@ Configuration xUser_CreateUserConfig {
 
     Import-DscResource -ModuleName xPSDesiredStateConfiguration
 
-    Node $nodeName {
+    Node localhost {
         xUser 'CreateUserAccount' {
             Ensure = 'Present'
             UserName = Split-Path -Path $Credential.UserName -Leaf
