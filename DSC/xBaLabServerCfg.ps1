@@ -11,38 +11,43 @@ Configuration xBaLabServerCfg {
 
     Import-DscResource -ModuleName xPSDesiredStateConfiguration
 
-    $groups = @('Remote Desktop Users', 'Hyper-V Administrators')
-    $features = @('Hyper-V', 'Hyper-V-Powershell')
-
     Node localhost {
 
         LocalConfigurationManager {
             RebootNodeIfNeeded = $true
         }
 
-        xUser 'CreateUserAccount' {
-            Ensure = 'Present'
+        xUser "CreateUserAccount" {
+            Ensure = "Present"
             UserName = Split-Path -Path $Credential.UserName -Leaf
             Password = $Credential
-            FullName = 'Baltic Apprentice'
-            Description = 'Baltic Apprentice'
+            FullName = "Baltic Apprentice"
+            Description = "Baltic Apprentice"
             PasswordNeverExpires = $true
             PasswordChangeRequired = $false
             PasswordChangeNotAllowed = $true
         }
 
-        xGroupSet 'AddMembers'
+        xGroup "AddRemoteDesktopUser"
         {
-            GroupName = $groups
-            Ensure = 'Present'
-            MembersToInclude = 'Apprentice'
-            DependsOn = '[xUser]Apprentice'
+            GroupName = "Remote Desktop Users"
+            Ensure = "Present"
+            MembersToInclude = "Apprentice"
+            DependsOn = "[xUser]Apprentice"
         }
 
-        xWindowsFeatureSet 'AddFeatures'
+        xGroup "AddHyperVAdministrator"
         {
-            Name = $features
-            Ensure = 'Present'
+            GroupName = "Hyper-V Administrators"
+            Ensure = "Present"
+            MembersToInclude = "Apprentice"
+            DependsOn = "[xUser]Apprentice"
+        }
+
+        xWindowsFeature "AddFeature"
+        {
+            Name = "Hyper-V"
+            Ensure = "Present"
             IncludeAllSubFeature = $true
         }
     }
