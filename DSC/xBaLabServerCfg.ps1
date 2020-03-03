@@ -31,12 +31,12 @@ Configuration xBaLabServerCfg {
             PasswordChangeNotAllowed = $true
         }
 
-        xGroup 'SetMembers'
+        xGroupSet 'SetMembers'
         {
             GroupName = $groups
             Ensure = 'Present'
             MembersToInclude = 'Apprentice'
-            DependsOn = '[User]Apprentice'
+            DependsOn = '[xUser]Apprentice'
         }
 
         xWindowsFeatureSet 'AddFeatures'
