@@ -33,7 +33,7 @@ Configuration xBaLabServerCfg {
             GroupName = "Remote Desktop Users"
             Ensure = "Present"
             MembersToInclude = "Apprentice"
-            DependsOn = "[xUser]Apprentice"
+            DependsOn = "[xUser]CreateUserAccount"
         }
 
         xGroup "AddHyperVAdministrator"
@@ -41,7 +41,7 @@ Configuration xBaLabServerCfg {
             GroupName = "Hyper-V Administrators"
             Ensure = "Present"
             MembersToInclude = "Apprentice"
-            DependsOn = "[xUser]Apprentice"
+            DependsOn = "[xUser]CreateUserAccount"
         }
 
         xWindowsFeature "AddFeature"
