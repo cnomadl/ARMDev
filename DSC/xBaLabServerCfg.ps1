@@ -11,6 +11,8 @@ Configuration xBaLabServerCfg {
 
     Import-DscResource -ModuleName xPSDesiredStateConfiguration
 
+    $features = @("Hyper-V", "RSAT-Hyper-V-Tools", "Hyper-V-Tools", "Hyper-V-PowerShell")
+
     Node localhost {
 
         LocalConfigurationManager {
@@ -44,9 +46,9 @@ Configuration xBaLabServerCfg {
             DependsOn = "[xUser]CreateUserAccount"
         }
 
-        xWindowsFeature "AddFeature"
+        xWindowsFeatureSet "AddHyperVFeatures"
         {
-            Name = "Hyper-V"
+            Name = $features
             Ensure = "Present"
             IncludeAllSubFeature = $true
         }
