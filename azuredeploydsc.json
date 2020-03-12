@@ -106,13 +106,13 @@
         "description": "Admin password for the Virtual Machine. If Linux SSH is recommended."
       }
     },
-    "noneAdminUsername": {
+    "localUsername": {
         "type":"string",
         "metadata":{
           "description": "None admin username"
         }
       },
-      "noneAdminUserPassword": {
+      "localUserPassword": {
         "type": "securestring",
         "metadata": {
           "description": "None admin user password. If Linux SSH is recommended."
@@ -372,6 +372,7 @@
       },
       "resources": [
         {
+            "condition": "[equals(parameters('platform'), 'Windows')]",
             "apiVersion": "2016-03-30",
             "type": "extensions",
             "name": "Microsoft.Powershell.DSC",
@@ -394,14 +395,14 @@
                 "configuration": {
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
                   "script": "xBaLabServerCfg.ps1",
-                  "function": "xBaLabServerCfg"
+                  "function": "xBaLabServerWinCfg"
                 }
               },
               "protectedSettings": {
                 "configurationArguments": {
                   "Credential": {
-                    "UserName": "[parameters('noneAdminUsername')]",
-                    "Password": "[parameters('noneAdminUserPassword')]"
+                    "UserName": "[parameters('localUsername')]",
+                    "Password": "[parameters('localUserPassword')]"
                   }
                 }
               }
