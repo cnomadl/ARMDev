@@ -1,4 +1,4 @@
-Configuration xBaLabServerCfg {
+Configuration xBaLabServerWinCfg {
     [CmdletBinding()]
 
     Param (
