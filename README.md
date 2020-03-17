@@ -37,7 +37,7 @@ This template allows you to deploy multiple Windows or linux VMs with various op
 
 # Multi Custom VM deployment to Azure with DSC for Test environment
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcnomadl%2Farmdev%2Fmaster%2Fazuredeploycustomdscw10test.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcnomadl%2Farmdev%2Fmaster%2Fazuredeploydscw10test.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
