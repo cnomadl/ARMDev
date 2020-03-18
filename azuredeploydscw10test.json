@@ -387,7 +387,7 @@
                 "configuration": {
                   "url": "[concat(variables('_artifactslocation'), '/', variables('dscArchiveFolder'), '/', variables('dscArchiveFileName'))]",
                   "script": "xBaLabServerCfg.ps1",
-                  "function": "[if(equals(parameters('operatingSystem'), 'Windows10Desktop'), 'xBaTestClientCfg', 'xBaLabServerCfg')]"
+                  "function": "[if(equals(parameters('operatingSystem'), 'Windows10Desktop'), 'xBaTestClientCfg', 'xBaLabServerWinCfg')]"
                 }
               },
               "protectedSettings": {
