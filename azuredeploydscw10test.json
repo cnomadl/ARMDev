@@ -61,7 +61,7 @@
         "type": "string",
         "defaultValue": "Standard_D2s_v3",
         "allowedValues": [
-            "Standard_B1ms",
+          "Standard_B1ms",
           "Standard_D2_v3",
           "Standard_D2s_v3",
           "Standard_DS3_v2"
@@ -140,7 +140,7 @@
       "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
       "operatingSystemValues": {
         "Windows10Desktop": {
-            "imageValue": "Win10BaseImage"
+            "imageValue": "Win10MasterImage"
         },
         "WindowsServer2012R2": {
             "imageValue": "BAT-WS2K12R2-Image"
@@ -203,7 +203,7 @@
         }
       ]
     },
-    "_artifactslocation": "https://raw.githubusercontent.com/balticapprenticeships/azure-extensions/master",
+    "_artifactslocation": "https://raw.githubusercontent.com/cnomadl/ARMDev/master",
     "dscArchiveFolder": "DSC",
     "dscArchiveFileName": "xBaLabServerCfg.zip"
     },
