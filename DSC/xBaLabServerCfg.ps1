@@ -30,7 +30,7 @@ Configuration xBaLabServerWinCfg {
             PasswordChangeNotAllowed = $true
         }
 
-        xGroup "AddRemoteDesktopUser"
+        xGroup "AddRemoteDesktopUserGroup"
         {
             GroupName = "Remote Desktop Users"
             Ensure = "Present"
@@ -38,9 +38,17 @@ Configuration xBaLabServerWinCfg {
             DependsOn = "[xUser]CreateUserAccount"
         }
 
-        xGroup "AddHyperVAdministrator"
+        xGroup "AddHyperVAdministratorGroup"
         {
             GroupName = "Hyper-V Administrators"
+            Ensure = "Present"
+            MembersToInclude = "Apprentice"
+            DependsOn = "[xUser]CreateUserAccount"
+        }
+
+        xGroup "AddToUsersGroup"
+        {
+            GroupName = "Users"
             Ensure = "Present"
             MembersToInclude = "Apprentice"
             DependsOn = "[xUser]CreateUserAccount"
@@ -86,9 +94,17 @@ Configuration xBaTestClientCfg {
             PasswordChangeNotAllowed = $true
         }
 
-        xGroup "AddRemoteDesktopUser"
+        xGroup "AddRemoteDesktopUserGroup"
         {
             GroupName = "Remote Desktop Users"
+            Ensure = "Present"
+            MembersToInclude = "Apprentice"
+            DependsOn = "[xUser]CreateUserAccount"
+        }
+
+        xGroup "AddToUsersGroup"
+        {
+            GroupName = "Users"
             Ensure = "Present"
             MembersToInclude = "Apprentice"
             DependsOn = "[xUser]CreateUserAccount"
